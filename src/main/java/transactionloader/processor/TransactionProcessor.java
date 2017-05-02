@@ -1,9 +1,11 @@
 package transactionloader.processor;
 
-import transactionloader.domain.Transaction;
+import transactionloader.domain.HSBCTransaction;
+
+import java.util.List;
 
 public interface TransactionProcessor {
 
-	Transaction processTransaction(Transaction input);
+	List<String> processTransaction(List<String> input);
 	
 }

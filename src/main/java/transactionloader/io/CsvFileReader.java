@@ -2,6 +2,7 @@ package transactionloader.io;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -20,8 +21,8 @@ public class CsvFileReader implements Reader {
 	public List<List<String>> readRows() throws IOException {
 
 		try {
-			return Files.lines(Paths.get(getClass().getResource(fileLocation).toURI()))
-                    .map(l -> Arrays.asList(l.split(",")))
+			return Files.lines(Paths.get(getClass().getResource(fileLocation).toURI()), Charset.defaultCharset())
+                    .map(l -> Arrays.asList(l.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")))
                     .collect(Collectors.toList());
 		} catch (URISyntaxException e) {
 			throw new IOException(e);
